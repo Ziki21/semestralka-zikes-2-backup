@@ -57,12 +57,12 @@ class AddTransaction : AppCompatActivity() {
 
         val newTransaction = Entita(name = nazev, amount = castka, description = popis)
 
-        // Získání DAO a vložení transakce (předpokládá použití coroutines)
+        // Získání DAO a vložení transakce
         val dao = FinanceDatabase.getDatabase(context = this).financeDao()
 
         CoroutineScope(Dispatchers.IO).launch {
             dao.insert(newTransaction)
-            // Přepněte zpět na hlavní vlákno, pokud potřebujete aktualizovat UI nebo zavřít aktivitu
+
             withContext(Dispatchers.Main) {
                 Toast.makeText(applicationContext, "Transakce Přidána", Toast.LENGTH_LONG).show()
                 finish()

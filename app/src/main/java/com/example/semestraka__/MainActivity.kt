@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerview)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = TransactionAdapter(listOf<Transaction>()) // Inicializujte seznam transakcí
+        adapter = TransactionAdapter(listOf<Transaction>())
         recyclerView.adapter = adapter
 
-        // Příklad aktualizace zobrazení
+
         //updateUI()
         //button pro přidání transakce
         btnAdd.setOnClickListener {
@@ -59,12 +59,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI() {
-        // Zde aktualizujte zůstatek, příjmy a výdaje na základě skutečných dat
+
         zustatekTextView.text = "1000 CZK"
         prijmyTextView.text = "600 CZK"
         vydajeTextView.text = "400 CZK"
 
-        // Aktualizujte seznam transakcí
+
         val transactions = listOf<Transaction>()
         adapter = TransactionAdapter(transactions)
         recyclerView.adapter = adapter

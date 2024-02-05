@@ -11,7 +11,7 @@ class TransactionAdapter(private val transactions: List<Transaction>) : Recycler
     class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewAmount: TextView = view.findViewById(R.id.amount)
         val textViewDescription: TextView = view.findViewById(R.id.description)
-        // Přidejte další komponenty podle potřeby
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransactionViewHolder {
@@ -23,7 +23,7 @@ class TransactionAdapter(private val transactions: List<Transaction>) : Recycler
         val transaction = transactions[position]
         holder.textViewAmount.text = "${transaction.amount} CZK"
         holder.textViewDescription.text = transaction.description
-        // Nastavte další hodnoty podle potřeby
+
     }
 
     override fun getItemCount() = transactions.size
