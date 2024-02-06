@@ -1,6 +1,7 @@
 package com.example.semestraka__
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -24,6 +25,11 @@ class AddTransaction : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnClose.setOnClickListener(){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         db = TransactionHelper(this)
 

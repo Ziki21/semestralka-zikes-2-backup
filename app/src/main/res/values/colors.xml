@@ -5,4 +5,6 @@
     <color name="background">#121212</color>
     <color name="dark">#0C0C0C</color>
     <color name="color">#00BCD4</color>
+    <color name="red">#CA0000</color>
+    <color name="green">#009F06</color>
 </resources>
