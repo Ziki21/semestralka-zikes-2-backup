@@ -5,8 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Context
+import android.content.Intent
 
-class TransactionAdapter(private val transactions: List<Transaction>) : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>() {
+class TransactionAdapter(private var transactions: List<Transaction>, context: Context) : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>() {
+
+    private val db: TransactionHelper = TransactionHelper(context)
 
     class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textViewAmount: TextView = view.findViewById(R.id.amount)
@@ -19,6 +23,8 @@ class TransactionAdapter(private val transactions: List<Transaction>) : Recycler
         return TransactionViewHolder(itemView)
     }
 
+    override fun getItemCount() = transactions.size
+
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val transaction = transactions[position]
         holder.textViewAmount.text = "${transaction.amount} CZK"
@@ -26,5 +32,8 @@ class TransactionAdapter(private val transactions: List<Transaction>) : Recycler
 
     }
 
-    override fun getItemCount() = transactions.size
+    fun refreshData(newTransaction: List<Transaction>){
+        transactions = newTransaction
+        notifyDataSetChanged()
+    }
 }
