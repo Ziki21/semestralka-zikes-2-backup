@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class TransactionHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
-
     companion object{
         private const val DATABASE_NAME = "transactionApp.db"
         private const val DATABASE_VERSION = 1
@@ -17,18 +16,15 @@ class TransactionHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NA
         private const val COLUMN_DESCRIPTION = "description"
         //private const val COLUMN_TYPE = "type"
     }
-
     override fun onCreate(db: SQLiteDatabase?) {
         val createTableQuery = "CREATE TABLE $TABLE_NAME ($COLUMN_ID INTEGER PRIMARY KEY, $COLUMN_NAME TEXT, $COLUMN_AMOUNT DOUBLE, $COLUMN_DESCRIPTION TEXT)"
         db?.execSQL(createTableQuery)
     }
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
         db?.execSQL(dropTableQuery)
         onCreate(db)
     }
-
     fun insertTransaction(note: Transaction){
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -40,7 +36,6 @@ class TransactionHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NA
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
-
     fun getAllNotes(): List<Transaction> {
         val transactionList = mutableListOf<Transaction>()
         val db = readableDatabase
@@ -53,8 +48,6 @@ class TransactionHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NA
             val amount = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_AMOUNT))
             val description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION))
             //val type = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TYPE))
-
-
             val note = Transaction(id, name, amount, description)
             transactionList.add(note)
         }
@@ -62,7 +55,6 @@ class TransactionHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NA
         db.close()
         return transactionList
     }
-
     fun editTransaction(transaction: Transaction){
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -87,13 +79,10 @@ class TransactionHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NA
         val amount = cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_AMOUNT))
         val description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION))
         //val type = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TYPE))
-
         cursor.close()
         db.close()
         return Transaction(id, name, amount, description)
-
     }
-
 
     fun deleteTransaction(transaction: Transaction){
         val db = writableDatabase

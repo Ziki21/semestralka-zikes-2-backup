@@ -47,15 +47,15 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        val transactions = db.getAllNotes() // Předpokládáme, že tato metoda vrací List<Transaction>
+        val transactions = db.getAllNotes()
         notesAdapter.refreshData(transactions)
-        updateUI(transactions) // Předáme transakce do updateUI
+        updateUI(transactions)
     }
 
     private fun updateUI(transactions: List<Transaction>) {
         val totalIncome = calculateTotalIncome(transactions)
         val totalExpenses = calculateTotalExpenses(transactions)
-        val balance = totalIncome - totalExpenses // Vypočítáme zůstatek
+        val balance = totalIncome - totalExpenses
 
         zustatekTextView.text = "$balance Kč"
         prijmyTextView.text = "$totalIncome Kč"

@@ -34,8 +34,6 @@ class TransactionAdapter(private var transactions: List<Transaction>, context: C
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val transaction = transactions[position]
 
-
-
         val context = holder.textViewDescription.context
 
         if(transaction.description == "prijem"){
@@ -45,10 +43,6 @@ class TransactionAdapter(private var transactions: List<Transaction>, context: C
             holder.textViewAmount.text = "-%.2f"
             holder.textViewAmount.setTextColor(ContextCompat.getColor(context, R.color.red))
         }
-
-
-
-
         holder.textViewName.text = transaction.name
         holder.textViewAmount.text = "${transaction.amount} CZK"
         holder.textViewDescription.text = transaction.description
@@ -60,16 +54,11 @@ class TransactionAdapter(private var transactions: List<Transaction>, context: C
             }
             holder.itemView.context.startActivity(intent)
         }
-
-
-
         holder.deleteButton.setOnClickListener{
             //val transactionId = transactions[position].id
             db.deleteTransaction(transaction)
             refreshData(db.getAllNotes())
         }
-
-
     }
 
     fun refreshData(newTransaction: List<Transaction>){
