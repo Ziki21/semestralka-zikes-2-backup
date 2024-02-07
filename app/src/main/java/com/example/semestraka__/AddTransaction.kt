@@ -3,8 +3,6 @@ package com.example.semestraka__
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,21 +24,23 @@ class AddTransaction : AppCompatActivity() {
         binding = ActivityAddTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        db = TransactionHelper(this)
+
         binding.btnClose.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-        db = TransactionHelper(this)
-
         binding.btnpridatTransakci.setOnClickListener {
             val name = binding.nazevvklad.text.toString()
             val amountString = binding.castkavklad.text.toString()
             val description = binding.popisvklad.text.toString()
+            //val typeString = binding.nazevvklad.text.toString()
 
             if (name.isNotEmpty() && amountString.isNotBlank() && description.isNotEmpty()){
                 val amount = amountString.toDouble()
-                val note = Transaction(name, amount, description)
+                //val type = typeString.toInt()
+                val note = Transaction(0, name, amount, description)
 
                 db.insertTransaction(note)
                 finish()

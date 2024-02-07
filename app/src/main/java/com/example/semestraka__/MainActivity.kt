@@ -45,16 +45,31 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    private fun updateUI() {
-
-        zustatekTextView.text = "1000 CZK"
-        prijmyTextView.text = "600 CZK"
-        vydajeTextView.text = "400 CZK"
-    }
-
     override fun onResume() {
         super.onResume()
-        notesAdapter.refreshData(db.getAllNotes())
+        val transactions = db.getAllNotes() // Předpokládáme, že tato metoda vrací List<Transaction>
+        notesAdapter.refreshData(transactions)
+        updateUI(transactions) // Předáme transakce do updateUI
     }
+
+    private fun updateUI(transactions: List<Transaction>) {
+        val totalIncome = calculateTotalIncome(transactions)
+        val totalExpenses = calculateTotalExpenses(transactions)
+        val balance = totalIncome - totalExpenses // Vypočítáme zůstatek
+
+        zustatekTextView.text = "$balance Kč"
+        prijmyTextView.text = "$totalIncome Kč"
+        vydajeTextView.text = "$totalExpenses Kč"
+    }
+
+    private fun calculateTotalIncome(transactions: List<Transaction>): Double {
+        return transactions.filter { it.description.contains("prijem", ignoreCase = true) }
+            .sumOf { it.amount }
+    }
+
+    private fun calculateTotalExpenses(transactions: List<Transaction>): Double {
+        return transactions.filter { it.description.contains("vydaj", ignoreCase = true) }
+            .sumOf { it.amount }
+    }
+
 }

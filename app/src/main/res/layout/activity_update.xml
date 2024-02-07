@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTransaction"
+    tools:context=".UpdateActivity"
     android:background="@color/background">
 
     <ImageButton
@@ -42,7 +42,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nazevvklad"
+                android:id="@+id/nazevedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/baseline_label_24"
@@ -63,7 +63,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/castkavklad"
+                android:id="@+id/castkaedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/baseline_attach_money_24"
@@ -84,7 +84,7 @@
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/popisvklad"
+                android:id="@+id/popisedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/baseline_article_24"
@@ -94,15 +94,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <Button
-            android:id="@+id/btnpridatTransakci"
+            android:id="@+id/btnEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/color"
-            android:text="Přidat transakci"
+            android:text="Editovat transakci"
             android:textColor="@color/dark" />
 
     </LinearLayout>
